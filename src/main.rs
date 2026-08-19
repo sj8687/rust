@@ -568,3 +568,240 @@
 
 
 
+
+
+//how to import pkg we use chrono library date and time lib  (cargo add chrono)
+
+// use chrono::Utc;
+
+// fn main() {
+//     let utc = Utc::now();
+//     println!("{}",utc);
+// }
+
+
+
+//how to read .env files
+
+// use dotenv::dotenv;
+// use std::env;
+
+// fn main() {
+//     dotenv().ok();
+//     let var = env::var(key:"REDIS_ADDRESS").unwrap();
+//     println!("{}", var)
+
+//     match var{
+//         Ok(str) => println!("{}", str),
+//         Err(_e) => println!("wtf")
+//     }
+// }
+
+
+
+
+//generics and traits we set one type of all kind of values
+
+// use std::ops::Add;
+
+// fn main() {
+//     let res = sum(1, 2);
+//     print!("{}",res)
+// }
+
+// fn sum<T : Add<Output=T>> (a:T, b:T) -> T {
+//     return a+b;
+// }
+
+//for big numbers traaits
+
+// fn bigg<T:Ord>(a:T,b:T) -> T {
+//     if a>b{
+//         return a;
+//     }
+
+//     return b;
+// }
+
+//for display traits
+
+// use std::fmt::Display;
+
+// fn bigg<T:Display>(a:T,b:T) {
+//    println!("{},{}",a,b);
+// }
+
+
+
+
+//generics over structs
+ 
+// #[derive(Clone, Copy)]
+
+// struct Rect<T> {
+//  width: T,
+//  height: T,
+// }
+
+
+// impl<T: std::ops::Mul<Output = T> + Copy>  Rect<T> {
+//     fn area(&self) -> T {
+//         return  self.width * self.height;
+//     }
+// }
+
+// fn main() {
+//     let r = Rect {
+//         width:12,
+//         height:1
+//     };
+
+//      let r1 = Rect {
+//         width:1.2,
+//         height:1.1
+//     };
+
+//     println!("{}",r1.area());
+//       println!("{}",r.area());
+// }
+
+
+
+// enum with generics
+
+// enum Option<T> {
+//     Some(T),
+//     None
+// }
+
+
+
+
+// imp traits bounds implemetation (its just a shape of a final output or thing)
+
+// trait Shape {  //just a signature of area fun like whoever imp this have a area fun
+//     fn area(&self) -> f32;
+// }
+
+// struct Rect {
+//     width:f32,
+//     height:f32
+// }
+
+
+// impl Shape for Rect {
+//     fn area(&self) -> f32 {
+//         return self.height * self.width;
+//     }
+// }
+
+
+// fn print<T:Shape>(s:T) {
+//     println!("{}",s.area())
+// }
+
+// fn main(){
+//     let r:Rect = Rect { 
+//         width: 10.0,
+//          height: 10.0
+//     };
+
+//     print(r);
+// }
+
+
+
+
+
+
+//macro is a code behind the rust like where we can write a another language for creting language like js 
+//if you want to see it have to insatll (cargo install cargo-expand) do (cargo expand)
+
+//declarative macros
+
+// function take input of fun name
+// macro_rules! generate_functions {
+//     ($($func_name:ident),*) => {
+//         $(
+//             fn $func_name(){
+//                 println!("hello {}", stringify!($func_name));
+//             }
+//         )*
+//     };
+// }
+
+// generate_functions!(foo,bar,baz);
+
+// fn main() {
+//     foo();
+//     bar();
+//     baz();
+// }
+
+
+
+
+
+
+
+
+// procedral macro
+
+// #[derive(serialize, Deserialize)]
+
+// struct  Use{
+//     nm: String,
+//     age:f32
+// }
+
+
+//attribute macro
+
+// #[route("GET")]
+// fn Home() {
+//     println!("hii");
+// }
+
+// #[route("POST")]
+// fn create() {
+//     println!("hii");
+// }
+
+//function like macro
+
+// #[derive(Sql("users"))]  //do something like sql query
+
+// struct  User{
+//     nm: String,
+//     age:f32
+// }
+
+// impl User {
+//     fn insert(){}
+//     fn delete(){}
+// }
+
+// u.insert()
+
+
+
+
+//debug trait display trait
+
+// #[derive(Debug)]
+// struct User {
+//     username: String,
+//     password: String,
+//     age: u32
+// }
+
+// fn main() {
+//     let u = User {
+//         username: String::from("sj"),
+//         password:String::from("sj"),
+//         age:22,
+//     };
+
+    // print!("{:?}",u);  //debug
+ //   print!("{}",u)    //display
+// } 
