@@ -166,7 +166,31 @@
 //     return  first_name;
 // }
 
+// or
+// fn main(){
+//     let numbers = vec![10, 20, 30];
 
+// for number in numbers.iter() {
+//     println!("{}", number);
+// }
+
+// }
+
+
+//iter
+
+// fn main() {
+//     let numbers = vec![10, 20, 30];
+
+// let iter = numbers.iter();
+
+// let mut iter = numbers.iter();
+
+// println!("{:?}", iter.next());
+// println!("{:?}", iter.next());
+// println!("{:?}", iter.next());
+// println!("{:?}", iter.next());
+// }
 
 
 
