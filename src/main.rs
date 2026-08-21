@@ -498,10 +498,43 @@
 // }
 
 
+//  #[derive(Debug)]
+// struct  Rect {
+//     length:u8,
+//     breadth:u8
+// }
+
+// impl Rect {
+//     fn new(new_len:u8, new_br:u8) -> Self {           //this one is associative function
+//         Self {
+//             length: new_len,
+//             breadth: new_br
+//         }
+//     }
+
+
+//     fn area(&mut self) -> u8 {  
+//         self.length = 90;          // if u r using small self then its method like this fun is method
+//         self.length * self.breadth    // if you want to make it mutable the just do &mut self 
+//     }
+// }
+
+// fn main() {
+//     let  mut rec_one:Rect =Rect::new(10,5);
+//     // println!("{:?}",rec_one);
+
+//    rec_one.area();
+//     println!("{:?}",rec_one)
+// }
+
+
+
+
 
 
 
 // enum
+
 // #[derive(PartialEq)]
 // enum Direaction  {
 //     North,
@@ -545,7 +578,7 @@
 // }
 
 
-//error handling
+//error handling with enum
 
 // use std::fs;
 
@@ -563,9 +596,67 @@
 //     }
 // }
 
-
 // option num we have 2 option of res or return type in enum
 
+
+// #[derive(Debug)]
+
+// enum Shape {
+//     Circle(f64),
+//     Rectangle(f64,f64)
+// }
+
+// impl Shape {
+//    fn new_circle(radius: f64) -> Self {   //this fun is kind of constructor for enum we can also do it with struct
+//         Self::Circle(radius)
+//     }
+
+//     fn new_rectangle(width: f64, height: f64) -> Self {
+//         Self::Rectangle(width, height)
+//     }
+// }
+
+// fn main() {
+//     let circle:Shape = Shape::new_circle(5.0);
+//     println!("circle:{:?}", circle)
+// }
+
+
+
+// with struct and enum
+// #[derive(Debug)]
+// struct Circle {
+//     radius: f64,
+// }
+
+// #[derive(Debug)]
+// struct Rectangle {
+//     width: f64,
+//     height: f64,
+// }
+
+// #[derive(Debug)]
+// enum Shape {
+//     Circle(Circle),
+//     Rectangle(Rectangle),
+// }
+
+// impl Shape {
+//     // Associated function — similar to a constructor
+//     fn new_circle(radius: f64) -> Self {
+//         Self::Circle(Circle { radius })
+//     }
+
+//     fn new_rectangle(width: f64, height: f64) -> Self {
+//         Self::Rectangle(Rectangle { width, height })
+//     }
+// }
+
+// fn main() {
+//     let circle: Shape = Shape::new_circle(5.0);
+
+//     println!("circle: {:?}", circle);
+// }
 
 
 
@@ -667,13 +758,48 @@
 
 
 
-// enum with generics
+// enum with generics we use for I may have a value, or I may have no value." same with OK and Err
 
 // enum Option<T> {
 //     Some(T),
 //     None
 // }
 
+// fn find_user(id: u32) -> Option<String> {
+//     if id == 1 {
+//         Some("Alice".to_string())
+//     } else {
+//         None
+//     }
+// }
+
+// fn main() {
+//     let user = find_user(1);
+
+//     println!("{:?}", user);
+// }
+
+
+
+
+// enum Result<T , E> {
+//     Ok(T),
+//     Err(E)
+// }
+
+// fn divide(a: f64, b: f64) -> Result<f64, String> {
+//     if b == 0.0 {
+//         Err("Cannot divide by zero".to_string())
+//     } else {
+//         Ok(a / b)
+//     }
+// }
+
+// fn main() {
+//     let result = divide(10.0, 2.0);
+
+//     println!("{:?}", result);
+// }
 
 
 
