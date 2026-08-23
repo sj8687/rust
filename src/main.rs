@@ -983,3 +983,134 @@
 //     }
 
 // }
+
+
+
+
+
+
+//serde
+// Computers outside your Rust program don't understand your Rust struct directly.
+// So you need to convert the data
+// Serde = Serialize + Deserialize
+
+
+// Serialization it will convert obj into string obj format
+
+
+// use serde::{Serialize};
+
+// #[derive(Serialize)]
+
+// struct User {
+//     name: String,
+//     age: u32,
+// }
+
+// fn main() {
+//     let user = User{
+//         name:String::from("sj"),
+//         age:23,
+//     };
+
+//     let json = serde_json::to_string(&user).unwrap();
+
+//     println!("Serialized: {}", json);
+// }
+
+
+
+
+//Deserialization it will convert string obj into obj format
+
+// use serde::Deserialize;
+
+// #[derive(Deserialize)]
+// struct User {
+//     name: String,
+//     age: u32,
+// }
+
+// fn main() {
+//     let data: &str = r#"
+//     {
+//         "name": "Shreyash",
+//         "age": 15
+//     }
+//     "#;
+
+//     let user: User = serde_json::from_str(data).unwrap();
+
+//     println!("{}", user.name);
+// }
+
+
+
+
+// Borsh  Borsh is another way to serialize and deserialize data in Rust, similar to Serde—but 
+//it is designed mainly for binary data and is very common in blockchain development, especially Solana...
+
+
+// use borsh::{BorshDeserialize, BorshSerialize};
+
+// #[derive(BorshSerialize, BorshDeserialize, Debug)]
+// struct User {
+//     name: String,
+//     age: u8,
+// }
+
+// fn main() {
+//     let user = User {
+//         name: String::from("Shreyash"),
+//         age: 15,
+//     };
+
+//     // Rust struct → bytes
+//     let bytes= borsh::to_vec(&user).unwrap();
+
+//     println!("Bytes: {:?}", bytes);
+
+//     // bytes → Rust struct
+//     let decoded_user = User::try_from_slice(&bytes).unwrap();
+
+//     println!("User: {:?}", decoded_user);
+// }
+
+
+
+
+
+//lifetime How long is this reference allowed to stay valid
+
+//problem it solves
+// fn main() {
+//     let reference;
+
+//     {
+//         let x = 10;
+//         reference = &x;
+//     }
+
+//     println!("{}", reference);
+// }
+
+
+
+// 'a mean lifetime
+
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+
+fn main() {
+    let string1 = String::from("hello");
+    let string2 = String::from("Shreyash");
+
+    let result = longest(&string1, &string2);
+
+    println!("The longest string is: {}", result);
+}
