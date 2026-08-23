@@ -170,7 +170,7 @@
 // fn main(){
 //     let numbers = vec![10, 20, 30];
 
-// for number in numbers.iter() {
+// for number in numbers.iter() {         //there r many methods of iterator like filter, map , reduce rust call it lazy iterator
 //     println!("{}", number);
 // }
 
@@ -955,3 +955,31 @@
     // print!("{:?}",u);  //debug
  //   print!("{}",u)    //display
 // } 
+
+
+
+
+
+//HashMap key-value store
+
+// use std::collections::HashMap;
+
+// fn main() {
+//     let mut students: HashMap<String, u32> = HashMap::new();
+//     students.insert("sj".to_owned(),100);
+//     students.insert("kj".to_owned(),2000);
+
+
+//     for (student, marks) in students.iter() {
+//         println!("students name {:?} marksv {}",student,marks)
+//     }
+
+
+//     students.insert("kj".to_owned(),20);
+
+//     match students.get("kj"){
+//         Some(marks) => println!("{}",marks),
+//         None => println!("not allow")
+//     }
+
+// }
