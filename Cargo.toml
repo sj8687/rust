@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+arc = "0.0.1"
 borsh = { version = "1.5.7", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"

@@ -1098,19 +1098,109 @@
 
 // 'a mean lifetime
 
-fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
-}
+// fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+//     if x.len() > y.len() {
+//         x
+//     } else {
+//         y
+//     }
+// }
+
+// fn main() {
+//     let string1 = String::from("hello");
+//     let string2 = String::from("Shreyash");
+
+//     let result = longest(&string1, &string2);
+
+//     println!("The longest string is: {}", result);
+// }
+
+
+
+
+
+
+
+
+
+
+//arc amd mutex , multithreading
+
+use std::sync::{Arc, Mutex};
+use std::thread;
 
 fn main() {
-    let string1 = String::from("hello");
-    let string2 = String::from("Shreyash");
+    let counter = Arc::new(Mutex::new(0));
 
-    let result = longest(&string1, &string2);
+    let mut handles = vec![];
 
-    println!("The longest string is: {}", result);
+    for _ in 0..5 {
+        let counter = Arc::clone(&counter);
+
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+            *num += 1;
+        });
+
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", *counter.lock().unwrap());
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use std::sync::{Arc, Mutex};
+
+use poem::{
+    get, listener::TcpListener, post, EndpointExt, Route, Server
+};
+use routes::{user::{sign_in, sign_up}, website::{create_website, get_website}};
+use store::store::Store;
+pub mod request_inputs;
+pub mod request_outputs;
+pub mod routes;
+
+\#[tokio::main(flavor = "multi_thread")]
+async fn main() -> Result<(), std::io::Error> {
+    let s = Arc::new(Mutex::new(Store::new().unwrap()));
+    let app = Route::new()
+        .at("/website/\:website_id", get(get_website))
+        .at("/website", post(create_website))
+        .at("/user/signup", post(sign_up))
+        .at("/user/signin", post(sign_in))
+        .data(s);
+    // creates and runs the http server
+    Server::new(TcpListener::bind("0.0.0.0:3000"))
+        .name("hello-world")
+        .run(app)
+        .await
+}
+
+
+
